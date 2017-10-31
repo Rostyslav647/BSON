@@ -49,6 +49,27 @@ extension JavascriptCode {
     }
 }
 
+extension Int64 {
+    public init?(_ value: Primitive?) {
+        switch value {
+        case let val as Int32:
+            self = Int64(val)
+        case let val as Int64:
+            self = val
+        case let val as Double where val < Double(Int64.max) && val > Double(Int64.min):
+            self = Int64(val)
+        case let val as String:
+            if let parsed = Int64(val) {
+                self = parsed
+            } else {
+                return nil
+            }
+        default:
+            return nil
+        }
+    }
+}
+
 extension Int {
     public init?(_ value: Primitive?) {
         switch value {

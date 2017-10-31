@@ -97,6 +97,8 @@ extension Document : Codable {
 //                try container.encode(value, forKey: codingKey)
 //            case let value as JavascriptCode:
 //                try container.encode(value, forKey: codingKey)
+            case let value as Int64:
+                try container.encode(value, forKey: codingKey)
             case let value as Int32:
                 try container.encode(value, forKey: codingKey)
             case let value as Int:

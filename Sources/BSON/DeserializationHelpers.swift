@@ -37,3 +37,19 @@ extension Int {
         self = number
     }
 }
+
+extension Int64 {
+    internal init<S : Collection>(_ s: S) where S.Iterator.Element == UInt8, S.Index == Int64 {
+        var number: Int64 = 0
+        number |= s.count > 7 ? Int64(s[s.startIndex.advanced(by: 7)]) << 56 : 0
+        number |= s.count > 6 ? Int64(s[s.startIndex.advanced(by: 6)]) << 48 : 0
+        number |= s.count > 5 ? Int64(s[s.startIndex.advanced(by: 5)]) << 40 : 0
+        number |= s.count > 4 ? Int64(s[s.startIndex.advanced(by: 4)]) << 32 : 0
+        number |= s.count > 3 ? Int64(s[s.startIndex.advanced(by: 3)]) << 24 : 0
+        number |= s.count > 2 ? Int64(s[s.startIndex.advanced(by: 2)]) << 16 : 0
+        number |= s.count > 1 ? Int64(s[s.startIndex.advanced(by: 1)]) << 8 : 0
+        number |= s.count > 0 ? Int64(s[s.startIndex.advanced(by: 0)]) << 0 : 0
+        
+        self = number
+    }
+}

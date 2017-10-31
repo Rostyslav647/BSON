@@ -108,6 +108,23 @@ internal protocol BSONMakeBytesProtocol: BSONBytesProtocol {
     func makeBytes() -> Bytes
 }
 
+extension Int64 : BSONBytesProtocol {
+    internal func makeBytes() -> Bytes {
+        let integer = self.littleEndian
+        
+        return [
+            Byte(integer & 0xFF),
+            Byte((integer >> 8) & 0xFF),
+            Byte((integer >> 16) & 0xFF),
+            Byte((integer >> 24) & 0xFF),
+            Byte((integer >> 32) & 0xFF),
+            Byte((integer >> 40) & 0xFF),
+            Byte((integer >> 48) & 0xFF),
+            Byte((integer >> 56) & 0xFF),
+        ]
+    }
+}
+
 extension Int : BSONBytesProtocol {
     internal func makeBytes() -> Bytes {
         let integer = self.littleEndian

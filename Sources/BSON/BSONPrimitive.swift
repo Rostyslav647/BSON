@@ -240,6 +240,16 @@ extension Double : Primitive {
     }
 }
 
+extension Int64 : Primitive {
+    public var typeIdentifier: Byte {
+        return 0x12
+    }
+    
+    public func makeBinary() -> Bytes {
+        return self.makeBytes()
+    }
+}
+
 extension Int32 : Primitive {
     public var typeIdentifier: Byte {
         return 0x10
